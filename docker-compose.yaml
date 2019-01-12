@@ -1,0 +1,13 @@
+version: '3'
+services:
+    shadowsocks-server:
+        build: ./Dockerfile
+        image: xyzrlee/shadowsocks-libev
+        restart: unless-stopped
+        ports:
+            - "8388:8388/tcp"
+            - "8388:8388/udp"
+        volumes:
+            - .:/conf:ro
+        entrypoint: ss-server
+        command: -s 0.0.0.0 -p 8388 -c /conf/config.json -v

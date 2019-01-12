@@ -1,0 +1,8 @@
+{
+    "password":"6JinbxSxVlJudcOMWUhNw5AXQdNOl31jXw3cUXFdvV4=",
+    "timeout":600,
+    "method":"chacha20-ietf-poly1305",
+    "mode":"tcp_and_udp",
+    "--ipv6_first":true,
+    "no_delay":true
+}
