@@ -42,5 +42,3 @@ RUN set -ex \
       | sort -u) \
  && rm -rf /tmp/repo
 
-USER nobody
-
