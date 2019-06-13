@@ -31,7 +31,7 @@ RUN set -ex \
  && make install \
  && cd /tmp/repo/v2ray-plugin \
  && go build \
- && install v2ray-plugin /usr/local/bin \
+ && install v2ray-plugin /usr/bin \
  && apk del .build-deps \
  # Runtime dependencies setup
  && apk add --no-cache \
@@ -40,8 +40,8 @@ RUN set -ex \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u) \
  && rm -rf /tmp/repo \
- && ls -lh /usr/local/bin/ss-* \
- && ls -lh /usr/local/bin/v2ray-plugin \
+ && ls -lh /usr/bin/ss-* \
+ && ls -lh /usr/bin/v2ray-plugin \
  && ss-server -h && ss-local -h \
  && v2ray-plugin -version
 
