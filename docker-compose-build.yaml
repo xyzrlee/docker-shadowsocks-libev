@@ -1,0 +1,7 @@
+version: '3'
+services:
+    shadowsocks-libev-server:
+        image: xyzrlee/shadowsocks-libev
+        build:
+          context: .
+          dockerfile: Dockerfile

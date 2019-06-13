@@ -3,7 +3,9 @@
 [![Build Status](https://travis-ci.com/xyzrlee/docker-shadowsocks-libev.svg?branch=master)](https://travis-ci.com/xyzrlee/docker-shadowsocks-libev)
 
 # usage
-docker compose yaml file example: [docker-compose.yaml](https://github.com/xyzrlee/docker-shadowsocks-libev/blob/master/docker-compose.yaml)
+- get an example for docker compose yaml file: [docker-compose.yaml](https://github.com/xyzrlee/docker-shadowsocks-libev/blob/master/docker-compose.yaml)
+- modify the configuration according to your usage scenario
+
 
 # see
 - https://github.com/shadowsocks/shadowsocks-libev
