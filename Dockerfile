@@ -34,7 +34,7 @@ RUN set -ex \
  && install v2ray-plugin /usr/bin \
  && cd / \
  && rm -rf /tmp/repo \
- && rm -rf /root/.cache \
+ && rm -rf $(go env GOCACHE) \
  && rm -rf $(go env GOPATH) \
  && apk del .build-deps \
  # Runtime dependencies setup
