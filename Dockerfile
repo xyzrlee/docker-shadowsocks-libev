@@ -36,7 +36,6 @@ RUN set -ex \
  && rm -rf /tmp/repo \
  && rm -rf /root/.cache \
  && rm -rf $(go env GOPATH) \
- && go clean \
  && apk del .build-deps \
  # Runtime dependencies setup
  && apk add --no-cache \
