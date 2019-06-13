@@ -43,8 +43,7 @@ RUN set -ex \
       $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/v2ray-plugin \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u) \
- && ls -lh /usr/bin/ss-* \
- && ls -lh /usr/bin/v2ray-plugin \
- && ss-server -h && ss-local -h \
+ && ls -lh /usr/bin/ss-* /usr/bin/v2ray-plugin \
+ && ss-server -h \
  && v2ray-plugin -version
 
