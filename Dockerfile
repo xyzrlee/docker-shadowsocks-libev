@@ -39,5 +39,9 @@ RUN set -ex \
       $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/obfs-* \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u) \
- && rm -rf /tmp/repo
+ && rm -rf /tmp/repo \
+ && ls -lh /usr/local/bin/ss-* \
+ && ls -lh /usr/local/bin/v2ray-plugin \
+ && ss-server -h && ss-local -h \
+ && v2ray-plugin -version
 
