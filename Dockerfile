@@ -20,19 +20,18 @@ RUN set -ex \
       mbedtls-dev \
       pcre-dev \
       git \
+      go \
  # Build & install
  && git clone https://github.com/shadowsocks/shadowsocks-libev.git /tmp/repo/shadowsocks-libev \
- && git clone https://github.com/shadowsocks/simple-obfs.git /tmp/repo/simple-obfs \
+ && git clone https://github.com/shadowsocks/v2ray-plugin.git /tmp/repo/v2ray-plugin \
  && cd /tmp/repo/shadowsocks-libev \
  && git submodule update --init --recursive \
  && ./autogen.sh \
  && ./configure --prefix=/usr --disable-documentation \
  && make install \
- && cd /tmp/repo/simple-obfs \
- && git submodule update --init --recursive \
- && ./autogen.sh \
- && ./configure --prefix=/usr --disable-documentation\
- && make install \
+ && cd /tmp/repo/v2ray-plugin \
+ && go build \
+ && install v2ray-plugin /usr/local/bin \
  && apk del .build-deps \
  # Runtime dependencies setup
  && apk add --no-cache \
