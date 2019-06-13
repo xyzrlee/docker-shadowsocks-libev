@@ -32,6 +32,11 @@ RUN set -ex \
  && cd /tmp/repo/v2ray-plugin \
  && go build \
  && install v2ray-plugin /usr/bin \
+ && cd / \
+ && rm -rf /tmp/repo \
+ && rm -rf /root/.cache \
+ && rm -rf $(go env GOPATH) \
+ && go clean \
  && apk del .build-deps \
  # Runtime dependencies setup
  && apk add --no-cache \
@@ -39,7 +44,6 @@ RUN set -ex \
       $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/obfs-* \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u) \
- && rm -rf /tmp/repo \
  && ls -lh /usr/bin/ss-* \
  && ls -lh /usr/bin/v2ray-plugin \
  && ss-server -h && ss-local -h \
