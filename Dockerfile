@@ -40,7 +40,7 @@ RUN set -ex \
  # Runtime dependencies setup
  && apk add --no-cache \
       rng-tools \
-      $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/obfs-* \
+      $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/v2ray-plugin \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u) \
  && ls -lh /usr/bin/ss-* \
