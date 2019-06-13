@@ -20,19 +20,22 @@ RUN set -ex \
       mbedtls-dev \
       pcre-dev \
       git \
+      go \
  # Build & install
  && git clone https://github.com/shadowsocks/shadowsocks-libev.git /tmp/repo/shadowsocks-libev \
- && git clone https://github.com/shadowsocks/simple-obfs.git /tmp/repo/simple-obfs \
+ && git clone https://github.com/shadowsocks/v2ray-plugin.git /tmp/repo/v2ray-plugin \
  && cd /tmp/repo/shadowsocks-libev \
  && git submodule update --init --recursive \
  && ./autogen.sh \
  && ./configure --prefix=/usr --disable-documentation \
  && make install \
- && cd /tmp/repo/simple-obfs \
- && git submodule update --init --recursive \
- && ./autogen.sh \
- && ./configure --prefix=/usr --disable-documentation\
- && make install \
+ && cd /tmp/repo/v2ray-plugin \
+ && go build \
+ && install v2ray-plugin /usr/bin \
+ && cd / \
+ && rm -rf /tmp/repo \
+ && rm -rf /root/.cache \
+ && rm -rf $(go env GOPATH) \
  && apk del .build-deps \
  # Runtime dependencies setup
  && apk add --no-cache \
@@ -40,5 +43,8 @@ RUN set -ex \
       $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/obfs-* \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u) \
- && rm -rf /tmp/repo
+ && ls -lh /usr/bin/ss-* \
+ && ls -lh /usr/bin/v2ray-plugin \
+ && ss-server -h && ss-local -h \
+ && v2ray-plugin -version
 
