@@ -5,5 +5,5 @@ install:
     - sudo apt-get install python-pip -y
     - sudo pip install docker-compose
 
-script: docker-compose build
+script: ./build.sh
 
