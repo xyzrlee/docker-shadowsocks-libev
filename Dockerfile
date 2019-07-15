@@ -26,6 +26,7 @@ RUN set -ex \
  && git clone https://github.com/shadowsocks/v2ray-plugin.git /tmp/repo/v2ray-plugin \
  && cd /tmp/repo/shadowsocks-libev \
  && git submodule update --init --recursive \
+ && git rev-parse HEAD \
  && ./autogen.sh \
  && ./configure --prefix=/usr --disable-documentation \
  && make install \
