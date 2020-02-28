@@ -2,13 +2,12 @@
 
 set -e
 
+[[ "${TRAVIS_BRANCH}" == "${DOCKERHUB_BUILD_BRANCH}" ]] || echo "branch [${TRAVIS_BRANCH}] not [${DOCKERHUB_BUILD_BRANCH}]" && exit 0
+
 REPO_URL="https://github.com/shadowsocks/shadowsocks-libev.git"
 REPO_NAME="shadowsocks-libev"
 REPO_VERSION_FILE_DIR="."
 REPO_VERSION_FILE="Changes"
-DOCKERHUB_BUILD_BRANCH="master"
-
-[[ "${TRAVIS_BRANCH}" == "${DOCKERHUB_BUILD_BRANCH}" ]] || echo "branch [${TRAVIS_BRANCH}] not [${DOCKERHUB_BUILD_BRANCH}]" && exit 0
 
 REPO_ROOT="${HOME}/repo"
 REPO_VERSION_FILE_PATH="${REPO_ROOT}/${REPO_NAME}/${REPO_VERSION_FILE_DIR}/${REPO_VERSION_FILE}"
