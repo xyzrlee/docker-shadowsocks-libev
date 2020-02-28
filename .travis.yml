@@ -4,5 +4,10 @@ install:
     - sudo apt-get update
     - sudo apt-get install docker-compose -y
 
-script: ./build.sh
+script: 
+    - ./build.sh
+    - ./deploy.sh
 
+cache:
+  directories:
+    - "$HOME/cache"
