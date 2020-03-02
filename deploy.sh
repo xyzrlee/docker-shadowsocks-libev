@@ -36,6 +36,8 @@ cp ${REPO_VERSION_FILE_PATH} ${VERSION_FILE_PATH}.new
 
 rm -rf ${REPO_ROOT}
 
+head -n 10 ${VERSION_FILE_PATH}.new
+
 set +e
 
 diff ${VERSION_FILE_PATH}.new ${VERSION_FILE_PATH} >/dev/null
