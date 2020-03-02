@@ -36,7 +36,15 @@ cp ${REPO_VERSION_FILE_PATH} ${VERSION_FILE_PATH}.new
 
 rm -rf ${REPO_ROOT}
 
+echo "new version file:"
+echo "------------------------------------"
 head -n 10 ${VERSION_FILE_PATH}.new
+echo "------------------------------------"
+echo
+echo "old version file:"
+echo "------------------------------------"
+head -n 10 ${VERSION_FILE_PATH}
+echo "------------------------------------"
 echo
 
 set +e
