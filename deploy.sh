@@ -37,11 +37,12 @@ cp ${REPO_VERSION_FILE_PATH} ${VERSION_FILE_PATH}.new
 rm -rf ${REPO_ROOT}
 
 head -n 10 ${VERSION_FILE_PATH}.new
+echo
 
 set +e
 
 diff ${VERSION_FILE_PATH}.new ${VERSION_FILE_PATH} >/dev/null
-[[ $? == 0 ]] && echo "same" && exit 0
+[[ $? == 0 ]] && echo "same version" && exit 0
 
 set -e
 
