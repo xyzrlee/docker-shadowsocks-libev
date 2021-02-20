@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
       - name: deploy
         env:
-          DOCKERHUB_BUILD_TRIGGER: ${{ DOCKERHUB_BUILD_TRIGGER }}
+          DOCKERHUB_BUILD_TRIGGER: ${{ secrets.DOCKERHUB_BUILD_TRIGGER }}
         run: |
           ls -alh
           chmod +x deploy.sh
