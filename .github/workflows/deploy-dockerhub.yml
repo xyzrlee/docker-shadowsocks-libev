@@ -16,7 +16,8 @@ jobs:
           path: 'shadowsocks/shadowsocks-libev'
       - name: checkout
         uses: actions/checkout@v2
-        path: ${{ github.repository }}
+        with:
+          path: ${{ github.repository }}
       - name: cache-version-files
         uses: actions/cache@v2
         with:
