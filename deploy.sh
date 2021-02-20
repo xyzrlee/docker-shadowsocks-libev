@@ -2,12 +2,6 @@
 
 set -e
 
-if [[ "${TRAVIS_BRANCH}" != "${DOCKERHUB_BUILD_BRANCH}" ]]
-then
-    echo "branch [${TRAVIS_BRANCH}] not [${DOCKERHUB_BUILD_BRANCH}]"
-    exit 0
-fi
-
 REPO_URL="https://github.com/shadowsocks/shadowsocks-libev.git"
 REPO_NAME="shadowsocks-libev"
 REPO_VERSION_FILE_DIR="."

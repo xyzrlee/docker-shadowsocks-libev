@@ -1,0 +1,23 @@
+name: deploy-dockerhub
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: cache-version-files
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: "$HOME/cache"
+          key: ${{ github.event.repository.name }}
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: deploy
+        run: |
+          chmod +x deploy.sh
+          deploy.sh
