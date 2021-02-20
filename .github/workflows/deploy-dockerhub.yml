@@ -21,4 +21,4 @@ jobs:
         run: |
           ls -alh
           chmod +x deploy.sh
-          deploy.sh
+          ./deploy.sh
