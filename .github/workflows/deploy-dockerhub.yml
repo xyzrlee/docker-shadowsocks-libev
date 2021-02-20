@@ -19,5 +19,6 @@ jobs:
         uses: actions/checkout@v2
       - name: deploy
         run: |
+          ls -alh
           chmod +x deploy.sh
           deploy.sh
