@@ -13,13 +13,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: 'shadowsocks/shadowsocks-libev'
+          path: '${HOME}/repo/shadowsocks/shadowsocks-libev'
       - name: checkout
         uses: actions/checkout@v2
       - name: cache-version-files
         uses: actions/cache@v2
         with:
           path: "$HOME/cache"
-          key: ${{ github.event.repository.name }}-cache-${{ hashFiles('**/lockfiles') }}
+          key: ${{ github.event.repository.name }}-cache-${{ hashFiles('${HOME}/repo/shadowsocks/shadowsocks-libev/Changes') }}
       - name: checkout
         uses: actions/checkout@v2
       - name: deploy
