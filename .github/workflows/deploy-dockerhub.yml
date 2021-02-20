@@ -13,20 +13,22 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: 'shadowsocks/shadowsocks-libev'
-          path: '${HOME}/repo/shadowsocks/shadowsocks-libev'
+          path: 'shadowsocks/shadowsocks-libev'
       - name: checkout
         uses: actions/checkout@v2
+        path: ${{ github.repository }}
       - name: cache-version-files
         uses: actions/cache@v2
         with:
           path: "$HOME/cache"
-          key: ${{ github.event.repository.name }}-cache-${{ hashFiles('${HOME}/repo/shadowsocks/shadowsocks-libev/Changes') }}
+          key: ${{ github.event.repository.name }}-cache-${{ hashFiles('${{ github.workspace }}/shadowsocks/shadowsocks-libev/Changes') }}
       - name: checkout
         uses: actions/checkout@v2
       - name: deploy
         env:
           DOCKERHUB_BUILD_TRIGGER: ${{ secrets.DOCKERHUB_BUILD_TRIGGER }}
         run: |
+          cd ${{ github.repository }}
           ls -alh
           chmod +x deploy.sh
           ./deploy.sh
