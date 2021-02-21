@@ -29,6 +29,8 @@ jobs:
         env:
           DOCKERHUB_BUILD_TRIGGER: ${{ secrets.DOCKERHUB_BUILD_TRIGGER }}
         run: |
+          pwd
+          ls -alh
           cd ${{ github.repository }}
           ls -alh
           chmod +x deploy.sh
