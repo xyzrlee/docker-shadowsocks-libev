@@ -18,15 +18,11 @@ jobs:
         with:
           path: "$HOME/cache"
           key: ${{ github.event.repository.name }}-cache-${{ hashFiles('shadowsocks-libev/Changes') }}
-      - name: checkout
-        uses: actions/checkout@v2
       - name: deploy
         env:
           DOCKERHUB_BUILD_TRIGGER: ${{ secrets.DOCKERHUB_BUILD_TRIGGER }}
         run: |
           pwd
-          ls -alh
-          cd ${{ github.repository }}
           ls -alh
           chmod +x deploy.sh
           ./deploy.sh
