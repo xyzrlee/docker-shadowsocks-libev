@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 CACHE_DIR="${HOME}/cache"
 FILE_DIR="shadowsocks-libev"
 FILE_NAME="Changes"
@@ -14,6 +12,8 @@ then
     echo "file exists"
     exit 0
 fi
+
+set -e
 
 mkdir -p ${CACHE_DIR}
 cp ${FILE_DIR}/${FILE_NAME} ${CACHE_DIR}
