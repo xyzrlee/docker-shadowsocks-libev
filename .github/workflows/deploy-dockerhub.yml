@@ -1,7 +1,7 @@
 name: deploy-dockerhub
 on:
   push:
-    branches: [ master ]
+    branches: [ "*" ]
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
@@ -12,17 +12,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          repository: 'shadowsocks/shadowsocks-libev'
-          path: 'shadowsocks/shadowsocks-libev'
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          path: ${{ github.repository }}
+          submodules: true
       - name: cache-version-files
         uses: actions/cache@v2
         with:
           path: "$HOME/cache"
-          key: ${{ github.event.repository.name }}-cache-${{ hashFiles('${{ github.workspace }}/shadowsocks/shadowsocks-libev/Changes') }}
+          key: ${{ github.event.repository.name }}-cache-${{ hashFiles('shadowsocks-libev/Changes') }}
       - name: checkout
         uses: actions/checkout@v2
       - name: deploy
