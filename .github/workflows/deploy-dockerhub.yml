@@ -16,7 +16,7 @@ jobs:
       - name: cache-version-files
         uses: actions/cache@v2
         with:
-          path: "$HOME/cache"
+          path: "~/cache"
           key: ${{ github.event.repository.name }}-cache-${{ hashFiles('shadowsocks-libev/Changes') }}
       - name: deploy
         env:
