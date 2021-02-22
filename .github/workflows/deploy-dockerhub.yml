@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "~/cache"
-          key: ${{ github.event.repository.name }}-cache-${{ hashFiles('shadowsocks-libev/Changes') }}
+          key: cache-${{ hashFiles('shadowsocks-libev/Changes') }}
       - name: deploy
         env:
           DOCKERHUB_BUILD_TRIGGER: ${{ secrets.DOCKERHUB_BUILD_TRIGGER }}
