@@ -28,7 +28,7 @@ RUN set -ex \
  && ./autogen.sh \
  && ./configure --prefix=/usr --disable-documentation \
  && make install \
- && ls -lh /usr/bin/ss-* /usr/bin/v2ray-plugin \
+ && ls -lh /usr/bin/ss-* \
  && ss-server -h
 
 # ------------------------------------------------
