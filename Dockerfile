@@ -2,8 +2,7 @@
 # Dockerfile for shadowsocks-libev
 #
 
-FROM alpine
-LABEL maintainer="Ricky Li <cnrickylee@gmail.com>"
+FROM alpine AS builder
 
 RUN set -ex \
  # Build environment setup
@@ -33,12 +32,18 @@ RUN set -ex \
  && cd /tmp/repo/v2ray-plugin \
  && go build \
  && install v2ray-plugin /usr/bin \
- && cd / \
- && rm -rf /tmp/repo \
- && rm -rf $(go env GOCACHE) \
- && rm -rf $(go env GOPATH) \
- && apk del .build-deps \
- # Runtime dependencies setup
+ && ls -lh /usr/bin/ss-* /usr/bin/v2ray-plugin \
+ && ss-server -h \
+ && v2ray-plugin -version
+
+# ------------------------------------------------
+
+FROM alpine
+
+COPY --from=builder /usr/bin/ss-* /usr/bin/
+COPY --from=builder /usr/bin/v2ray-plugin /usr/bin/
+
+RUN set -ex \
  && apk add --no-cache \
       rng-tools \
       $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/v2ray-plugin \
@@ -47,4 +52,3 @@ RUN set -ex \
  && ls -lh /usr/bin/ss-* /usr/bin/v2ray-plugin \
  && ss-server -h \
  && v2ray-plugin -version
-
