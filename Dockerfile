@@ -22,33 +22,26 @@ RUN set -ex \
       go \
  # Build & install
  && git clone https://github.com/shadowsocks/shadowsocks-libev.git /tmp/repo/shadowsocks-libev \
- && git clone https://github.com/shadowsocks/v2ray-plugin.git /tmp/repo/v2ray-plugin \
  && cd /tmp/repo/shadowsocks-libev \
  && git submodule update --init --recursive \
  && git rev-parse HEAD \
  && ./autogen.sh \
  && ./configure --prefix=/usr --disable-documentation \
  && make install \
- && cd /tmp/repo/v2ray-plugin \
- && go build \
- && install v2ray-plugin /usr/bin \
  && ls -lh /usr/bin/ss-* /usr/bin/v2ray-plugin \
- && ss-server -h \
- && v2ray-plugin -version
+ && ss-server -h
 
 # ------------------------------------------------
 
 FROM alpine
 
 COPY --from=builder /usr/bin/ss-* /usr/bin/
-COPY --from=builder /usr/bin/v2ray-plugin /usr/bin/
 
 RUN set -ex \
  && apk add --no-cache \
       rng-tools \
-      $(scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/v2ray-plugin \
+      $(scanelf --needed --nobanner /usr/bin/ss-* \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u) \
- && ls -lh /usr/bin/ss-* /usr/bin/v2ray-plugin \
- && ss-server -h \
- && v2ray-plugin -version
+ && ls -lh /usr/bin/ss-* \
+ && ss-server -h
